@@ -1,6 +1,6 @@
-import { ObjectType, Field } from 'type-graphql';
+import { InputType, Field } from 'type-graphql';
 
-@ObjectType()
+@InputType()
 export class TextType {
   @Field()
   readonly word: string;
