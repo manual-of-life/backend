@@ -1,13 +1,13 @@
 import { InputType, Field, ID } from 'type-graphql';
 
-import { TextType } from './input-text.model';
+import { TextInput } from './input-text.model';
 
 @InputType()
-export class VerseType {
+export class VerseInput {
   @Field(() => ID)
   readonly id?: string;
   @Field()
-  readonly text: [TextType];
+  readonly text: [TextInput];
   @Field(() => Array)
   readonly comment: [number];
 }
