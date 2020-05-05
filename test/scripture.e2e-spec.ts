@@ -1,12 +1,11 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import * as request from 'supertest';
+import request from 'supertest';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 
 import { Scripture } from '../src/scripture/interfaces/scripture.interface';
 import { ScriptureModule } from '../src/scripture/scripture.module';
 
-import { Words } from '../src/scripture/interfaces/words.interface';
 import { ETypeScripture, ETypeRainbow } from '../src/scripture/scripture.constants';
 
 describe('ScriptureController (e2e)', () => {
@@ -16,7 +15,7 @@ describe('ScriptureController (e2e)', () => {
     const moduleFixture: TestingModule = await Test.createTestingModule({
       imports: [
         ScriptureModule,
-        MongooseModule.forRoot('mongodb://localhost/graphqltesting'),
+        MongooseModule.forRoot('mongodb://localhost/graphql'),
         GraphQLModule.forRoot({
           autoSchemaFile: 'schema.gql',
         }),
@@ -55,18 +54,31 @@ describe('ScriptureController (e2e)', () => {
           word: " (zur Zerstoerung komme),"
         }, {
           word: "sondern ewiges Leben habe.",
-        }] as [Words],
-      }]
+        }],
+      }],
     }],
-  };
+  } as Scripture;
 
-  let id: string = '';
+  let id = '';
 
   const updatedScripture: Scripture = {
-    title: 'Great updated scripture',
-    price: 20,
-    description: 'Updated description of this great scripture',
-  };
+    title: 'John',
+    type: ETypeScripture.Gospel,
+    chapter: [{
+      idx: 3,
+      verse: [{
+        idx: 17,
+        type: ETypeRainbow.Love,
+        words: [{
+          word: "Denn Gott hat den Sohn nicht in die Welt gesandt um zu richten"
+        }, {
+          word: "(abzuweisen, verdammen, oder eine Verurteilung zu bestimmen),",
+        }, {
+          word: "sondern damit die Welt Erloesung finden moege und sie durch Ihn sicher und gesund werde."
+        }],
+      }],
+    }],
+  } as Scripture;
 
   const createscriptureObject = JSON.stringify(scripture).replace(
     /\"([^(\")"]+)\":/g,
@@ -77,8 +89,8 @@ describe('ScriptureController (e2e)', () => {
   mutation {
     createScripture(input: ${createscriptureObject}) {
       title
-      price
-      description
+      type
+      chapter
       id
     }
   }`;
@@ -94,8 +106,8 @@ describe('ScriptureController (e2e)', () => {
         const data = body.data.createScripture;
         id = data.id;
         expect(data.title).toBe(scripture.title);
-        expect(data.description).toBe(scripture.description);
-        expect(data.price).toBe(scripture.price);
+        expect(data.type).toBe(scripture.type);
+        expect(data.chapter).toBe(scripture.chapter);
       })
       .expect(200);
   });
@@ -112,8 +124,8 @@ describe('ScriptureController (e2e)', () => {
         const scriptureResult = data[0];
         expect(data.length).toBeGreaterThan(0);
         expect(scriptureResult.title).toBe(scripture.title);
-        expect(scriptureResult.description).toBe(scripture.description);
-        expect(scriptureResult.price).toBe(scripture.price);
+        expect(scriptureResult.type).toBe(scripture.type);
+        expect(scriptureResult.chapter).toBe(scripture.chapter);
       })
       .expect(200);
   });
@@ -143,8 +155,8 @@ describe('ScriptureController (e2e)', () => {
       .expect(({ body }) => {
         const data = body.data.updateScripture;
         expect(data.title).toBe(updatedScripture.title);
-        expect(data.description).toBe(updatedScripture.description);
-        expect(data.price).toBe(updatedScripture.price);
+        expect(data.type).toBe(updatedScripture.type);
+        expect(data.chapter).toBe(updatedScripture.chapter);
       })
       .expect(200);
   });
@@ -169,8 +181,8 @@ describe('ScriptureController (e2e)', () => {
       .expect(({ body }) => {
         const data = body.data.deleteScripture;
         expect(data.title).toBe(updatedScripture.title);
-        expect(data.description).toBe(updatedScripture.description);
-        expect(data.price).toBe(updatedScripture.price);
+        expect(data.type).toBe(updatedScripture.type);
+        expect(data.chapter).toBe(updatedScripture.chapter);
       })
       .expect(200);
   });
