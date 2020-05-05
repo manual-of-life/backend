@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { InputType, Field } from 'type-graphql';
 
 import { WordsInput } from './input-words.model';
@@ -10,7 +11,7 @@ export class VerseInput {
   @Field()
   readonly type?: TRainbow;
   @Field()
-  readonly words: [WordsInput];
+  readonly words: Types.Array<WordsInput>;
   @Field(() => Array)
-  readonly comment?: [number];
+  readonly comment?: Types.Array<number>;
 }

@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { ObjectType, Field } from 'type-graphql';
 
 import { VerseType } from './create-verse.dto';
@@ -7,6 +8,6 @@ export class ChapterType {
   @Field()
   readonly idx: number;
   @Field()
-  readonly verse: [VerseType];
+  readonly verse: Types.Array<VerseType>;
 }
 

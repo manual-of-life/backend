@@ -2,6 +2,7 @@ import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ScriptureService } from './scripture.service';
 import { ScriptureType } from './dto/create-scripture.dto';
 import { ScriptureInput } from './model/input-scripture.model';
+import { Scripture } from './interfaces/scripture.interface';
 
 @Resolver()
 export class ScriptureResolver {
@@ -20,7 +21,7 @@ export class ScriptureResolver {
   @Mutation(() => ScriptureType)
   async updateScripture(
     @Args('id') id: string,
-    @Args('input') input: ScriptureInput,
+    @Args('input') input: Scripture,
   ): Promise<ScriptureInput> {
     return this.scriptureService.update(id, input);
   }

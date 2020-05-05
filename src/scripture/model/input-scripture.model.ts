@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { InputType, Field } from 'type-graphql';
 
 import { ChapterInput } from './input-chapter.model';
@@ -11,6 +12,6 @@ export class ScriptureInput {
   @Field()
   readonly type: TScripture;
   @Field()
-  readonly chapter: [ChapterInput];
+  readonly chapter: Types.Array<ChapterInput>;
 }
 

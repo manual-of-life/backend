@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { InputType, Field } from 'type-graphql';
 
 import { VerseInput } from './input-verse.model';
@@ -7,6 +8,6 @@ export class ChapterInput {
   @Field()
   readonly idx: number;
   @Field()
-  readonly verse: [VerseInput];
+  readonly verse: Types.Array<VerseInput>;
 }
 

@@ -14,6 +14,6 @@ export class ScriptureType {
   @Field()
   readonly type: TScripture;
   @Field()
-  readonly chapter: [ChapterType];
+  readonly chapter: Types.Array<ChapterType>;
 }
 
