@@ -3,6 +3,7 @@ export enum ETypeRainbow {
   Father = "father",
   Son = "son",
   Wisdom = "wisdom",
+  Love = "love",
   Truth = "truth",
   Law = "law",
   Prophecy = "prophecy",
@@ -10,6 +11,24 @@ export enum ETypeRainbow {
   Armament = "armament",
   Instruction = "instruction",
 }
+
+export type TRainbow = ETypeRainbow;
+
+export enum ETypeScripture {
+  Law = "law",
+  Prophets = "prophets",
+  Culture = "culture",
+  Wisdom = "wisdom",
+  Gospel = "gospel",
+  Acts = "acts",
+  Paul = "paul",
+  Peter = "peter",
+  John = "john",
+  Jude = "jude",
+  Revelation = "revelation",
+}
+
+export type TScripture = ETypeScripture;
 
 export enum EConnection {
   DB = "DATABASE_CONNECTION",
