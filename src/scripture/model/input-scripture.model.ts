@@ -10,6 +10,7 @@ export class ScriptureInput {
   readonly title: string;
   @Field()
   readonly type: TScripture;
+  @Field()
   readonly chapter: [ChapterInput];
 }
 

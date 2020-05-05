@@ -3,6 +3,7 @@ export enum ETypeRainbow {
   Father = "father",
   Son = "son",
   Wisdom = "wisdom",
+  Love = "love",
   Truth = "truth",
   Law = "law",
   Prophecy = "prophecy",
@@ -10,6 +11,8 @@ export enum ETypeRainbow {
   Armament = "armament",
   Instruction = "instruction",
 }
+
+export type TRainbow = ETypeRainbow;
 
 export enum ETypeScripture {
   Law = "law",

@@ -1,3 +1,4 @@
+import { Types } from 'mongoose';
 import { ObjectType, Field, ID } from 'type-graphql';
 
 import { ChapterType } from './create-chapter.dto';
@@ -12,6 +13,7 @@ export class ScriptureType {
   readonly title: string;
   @Field()
   readonly type: TScripture;
+  @Field()
   readonly chapter: [ChapterType];
 }
 

@@ -1,9 +1,12 @@
-import { Document } from 'mongoose';
+import { Types } from 'mongoose';
 
-import { Text } from './text.interface';
+import { Words } from './words.interface';
 
-export interface Verse extends Document {
-  readonly id: string;
-  readonly text: [Text];
-  readonly comment: [number];
+import { TRainbow } from '../scripture.constants';
+
+export interface Verse extends Types.Subdocument {
+  readonly idx: number;
+  readonly type?: TRainbow;
+  readonly words: Types.Array<Words>;
+  readonly comment?: Types.Array<number>;
 }

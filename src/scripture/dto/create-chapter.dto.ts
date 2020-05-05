@@ -1,11 +1,11 @@
-import { ObjectType, Field, ID } from 'type-graphql';
+import { ObjectType, Field } from 'type-graphql';
 
 import { VerseType } from './create-verse.dto';
 
 @ObjectType()
 export class ChapterType {
-  @Field(() => ID)
-  readonly id?: string;
+  @Field()
+  readonly idx: number;
   @Field()
   readonly verse: [VerseType];
 }

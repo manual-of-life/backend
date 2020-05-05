@@ -5,16 +5,16 @@ import { ScriptureInput } from './model/input-scripture.model';
 
 @Resolver()
 export class ScriptureResolver {
-  constructor(private readonly itemsService: ScriptureService) {}
+  constructor(private readonly scriptureService: ScriptureService) {}
 
   @Query(() => [ScriptureType])
   async items(): Promise<ScriptureType[]> {
-    return this.itemsService.findAll();
+    return this.scriptureService.findAll();
   }
 
   @Mutation(() => ScriptureType)
   async createScripture(@Args('input') input: ScriptureInput): Promise<ScriptureInput> {
-    return this.itemsService.create(input);
+    return this.scriptureService.create(input);
   }
 
   @Mutation(() => ScriptureType)
@@ -22,11 +22,11 @@ export class ScriptureResolver {
     @Args('id') id: string,
     @Args('input') input: ScriptureInput,
   ): Promise<ScriptureInput> {
-    return this.itemsService.update(id, input);
+    return this.scriptureService.update(id, input);
   }
 
   @Mutation(() => ScriptureType)
   async deleteScripture(@Args('id') id: string): Promise<ScriptureInput> {
-    return this.itemsService.delete(id);
+    return this.scriptureService.delete(id);
   }
 }

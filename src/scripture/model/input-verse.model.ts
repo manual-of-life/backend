@@ -1,13 +1,16 @@
-import { InputType, Field, ID } from 'type-graphql';
+import { InputType, Field } from 'type-graphql';
 
-import { TextInput } from './input-text.model';
+import { WordsInput } from './input-words.model';
+import { TRainbow } from '../scripture.constants';
 
 @InputType()
 export class VerseInput {
-  @Field(() => ID)
-  readonly id?: string;
   @Field()
-  readonly text: [TextInput];
+  readonly idx: number;
+  @Field()
+  readonly type?: TRainbow;
+  @Field()
+  readonly words: [WordsInput];
   @Field(() => Array)
-  readonly comment: [number];
+  readonly comment?: [number];
 }

@@ -1,11 +1,11 @@
-import { InputType, Field, ID } from 'type-graphql';
+import { InputType, Field } from 'type-graphql';
 
 import { VerseInput } from './input-verse.model';
 
 @InputType()
 export class ChapterInput {
-  @Field(() => ID)
-  readonly id?: string;
+  @Field()
+  readonly idx: number;
   @Field()
   readonly verse: [VerseInput];
 }

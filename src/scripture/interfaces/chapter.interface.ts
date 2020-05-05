@@ -1,8 +1,8 @@
-import { Document } from 'mongoose';
+import { Types } from 'mongoose';
 
 import { Verse } from './verse.interface';
 
-export interface Chapter extends Document {
-  readonly id: string;
-  readonly verse: [Verse];
+export interface Chapter extends Types.Subdocument {
+  readonly idx: number;
+  readonly verse: Types.Array<Verse>;
 }

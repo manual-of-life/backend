@@ -1,18 +1,26 @@
 import * as mongoose from 'mongoose';
 
-export const ScriptureSchema = new mongoose.Schema({
-  id: Number,
-  title: String,
-  chapter: [{
-    id: Number,
-    verse: [{
-      id: Number,
-      text: [{
-        word: String,
-        type: String,
-        explanation: String,
-      }],
-      comment: [Number],
-    }],
-  }],
+const WordsSchema = new mongoose.Schema({
+  word: String,
+  type: { type: String, required: false } ,
+  explanation: { type: String, required: false },
 });
+
+const VerseSchema = new mongoose.Schema({
+  idx: { type: Number, required: true },
+  type: { type: String, required: false },
+  words: [WordsSchema],
+  comment: { type: Array, required: false },
+});
+
+const ChapterSchema = new mongoose.Schema({
+  idx: { type: Number, required: true },
+  verse: [VerseSchema],
+});
+
+export const ScriptureSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  type: { type: String, required: true },
+  chapter: [ChapterSchema],
+});
+
